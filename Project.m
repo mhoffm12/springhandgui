@@ -129,34 +129,88 @@ function videoChoice_Callback(hObject, eventdata, handles)
 
 videoChoice=get(handles.videoChoice, 'Value');
 switch videoChoice
+   % Load all shit
+videoChoice=get(handles.videoChoice, 'Value');
+% Load pictures
+raptorScrew = imread('Raptor_Screwdriver.JPG');
+teraScrew = imread('Tera_Screwdriver.JPG');
+humanScrew = imread('Human_Screwdriver.JPG');
+raptorPhone = imread('Raptor_Phone.JPG');
+teraPhone = imread('Tera_Phone.JPG');
+humanPhone = imread('Human_Phone.JPG');
+raptorBall = imread(' ');
+teraBall = imread(' ');
+humanBall = imread(' ');
+raptorSide = imread( ' ');
+teraSide = imread(' ');
+humanSide = imread(' ');
+raptorFront = imread(' ');
+teraFront = imread(' ');
+humanFront = imread(' ');
+
+switch videoChoice
     case 1 %screw
         axes(handles.raptor);
-        imshow('raptorScrew.JPG');
+        imrotate(raptorScrew, 90);
+        imshow(raptorScrew);
+        
         axes(handles.Tera);
-        imshow('TScrew.JPG');
+        imrotate(teraScrew, 90);
+        imshow(teraScrew');
+        
         axes(handles.Human);
-        imshow('handScrew.JPG');
+        imrotate(humanScrew,90);
+        imshow(humanScrew);
     case 2 %phone choice
         axes(handles.raptor);
-        imshow('raptorPhone.JPG');
+        imrotate(raptorPhone,90);
+        imshow(raptorPhone);
+        
         axes(handles.Tera);
-        imshow('TPhone.JPG');
+        imrotate(teraPhone,90);
+        imshow(teraPhone);
+        
         axes(handles.Human);
-        imshow('handPhone.JPG');
-    case 3
+        imrotate(humanPhone, 90);
+        imshow(humanPhone);
+    case 3 % Ball
         axes(handles.raptor);
-        imshow('raptorPhone.JPG');
+        imrotate(raptorBall,90);
+        imshow(raptorBall);
+        
         axes(handles.Tera);
-        imshow('TPhone.JPG');
+        imrotate(teraBall, 90);
+        imshow(teraBall);
+        
         axes(handles.Human);
-        imshow('handPhone.JPG');
-    case 4
+        imrotate(humanBall, 90);
+        imshow(humanBall);
+    case 4 % front view
         axes(handles.raptor);
-        imshow('raptorPhone.JPG');
+        imrotate(raptorFront, 90);
+        imshow(raptorFront);
+        
         axes(handles.Tera);
-        imshow('TPhone.JPG');
+        imrotate(teraFront, 90);
+        imshow(teraFront);
+        
         axes(handles.Human);
-        imshow('handPhone.JPG');
+        imrotate(humanFront, 90);
+        imshow(humanFront);
+    case 5 %side view
+        axes(handles.raptor);
+        imrotate(raptorSide, 90);
+        imshow(raptorSide);
+        
+        axes(handles.Tera);
+        imrotate(teraSide, 90);
+        imshow(teraSide);
+        
+        axes(handles.Human);
+        imrotate(humanSide, 90);
+        imshow(humanSide);
+end
+
 % elseif videoChoice = 'Side View Grasp'
 %     axes(handles.raptorImg);
 %     imshow('raptorPhone.JPG');
