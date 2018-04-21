@@ -151,63 +151,63 @@ humanFront = imread(' ');
 switch videoChoice
     case 1 %screw
         axes(handles.raptor);
-        imrotate(raptorScrew, 90);
+        imrotate(raptorScrew, 0);
         imshow(raptorScrew);
         
         axes(handles.Tera);
-        imrotate(teraScrew, 90);
+        imrotate(teraScrew, 0);
         imshow(teraScrew');
         
         axes(handles.Human);
-        imrotate(humanScrew,90);
+        imrotate(humanScrew,0);
         imshow(humanScrew);
     case 2 %phone choice
         axes(handles.raptor);
-        imrotate(raptorPhone,90);
+        imrotate(raptorPhone,0);
         imshow(raptorPhone);
         
         axes(handles.Tera);
-        imrotate(teraPhone,90);
+        imrotate(teraPhone,0);
         imshow(teraPhone);
         
         axes(handles.Human);
-        imrotate(humanPhone, 90);
+        imrotate(humanPhone, 0);
         imshow(humanPhone);
     case 3 % Ball
         axes(handles.raptor);
-        imrotate(raptorBall,90);
+        imrotate(raptorBall,0);
         imshow(raptorBall);
         
         axes(handles.Tera);
-        imrotate(teraBall, 90);
+        imrotate(teraBall, 0);
         imshow(teraBall);
         
         axes(handles.Human);
-        imrotate(humanBall, 90);
+        imrotate(humanBall, 0);
         imshow(humanBall);
     case 4 % front view
         axes(handles.raptor);
-        imrotate(raptorFront, 90);
+        imrotate(raptorFront, 0);
         imshow(raptorFront);
         
         axes(handles.Tera);
-        imrotate(teraFront, 90);
+        imrotate(teraFront, 0);
         imshow(teraFront);
         
         axes(handles.Human);
-        imrotate(humanFront, 90);
+        imrotate(humanFront, 0);
         imshow(humanFront);
     case 5 %side view
         axes(handles.raptor);
-        imrotate(raptorSide, 90);
+        imrotate(raptorSide, 0);
         imshow(raptorSide);
         
         axes(handles.Tera);
-        imrotate(teraSide, 90);
+        imrotate(teraSide, 0);
         imshow(teraSide);
         
         axes(handles.Human);
-        imrotate(humanSide, 90);
+        imrotate(humanSide, 0);
         imshow(humanSide);
 end
 
