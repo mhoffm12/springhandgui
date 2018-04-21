@@ -1,4 +1,4 @@
-gufunction varargout = Project(varargin)
+function varargout = Project(varargin)
 % PROJECT MATLAB code for Project.fig
 %      PROJECT, by itself, creates a new PROJECT or raises the existing
 %      singleton*.
@@ -22,7 +22,7 @@ gufunction varargout = Project(varargin)
 
 % Edit the above text to modify the response to help Project
 
-% Last Modified by GUIDE v2.5 19-Apr-2018 21:20:00
+% Last Modified by GUIDE v2.5 21-Apr-2018 11:23:49
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -44,6 +44,8 @@ end
 % End initialization code - DO NOT EDIT
 
 
+end
+
 % --- Executes just before Project is made visible.
 function Project_OpeningFcn(hObject, eventdata, handles, varargin)
 % This function has no output args, see OutputFcn.
@@ -61,6 +63,7 @@ guidata(hObject, handles);
 % UIWAIT makes Project wait for user response (see UIRESUME)
 % uiwait(handles.figure1);
 
+end
 
 % --- Outputs from this function are returned to the command line.
 function varargout = Project_OutputFcn(hObject, eventdata, handles) 
@@ -72,7 +75,7 @@ function varargout = Project_OutputFcn(hObject, eventdata, handles)
 % Get default command line output from handles structure
 varargout{1} = handles.output;
 
-
+end 
 % --- Executes on selection change in listbox1.
 function listbox1_Callback(hObject, eventdata, handles)
 % hObject    handle to listbox1 (see GCBO)
@@ -81,7 +84,7 @@ function listbox1_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns listbox1 contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from listbox1
-
+end 
 
 % --- Executes during object creation, after setting all properties.
 function listbox1_CreateFcn(hObject, eventdata, handles)
@@ -95,20 +98,28 @@ if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgr
     set(hObject,'BackgroundColor','white');
 end
 
-
+end
 % --- Executes on slider movement.
-function KVal_Callback(hObject, eventdata, handles)
-% hObject    handle to KVal (see GCBO)
+function KValSlide_Callback(hObject, eventdata, handles)
+% hObject    handle to KValSlide (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
 % Hints: get(hObject,'Value') returns position of slider
 %        get(hObject,'Min') and get(hObject,'Max') to determine range of slider
 
+k=handles.KValSlide.Value; %go find the slider and store the value in the variable Atext
+handles.KValEText.String=num2str(k);
+
+[theta, Force] = HookFunc(k);
+plot(theta, Force, 'm');
+axes(handles.forceGraph);
+axis([0 90 0 500]);
+end
 
 % --- Executes during object creation, after setting all properties.
-function KVal_CreateFcn(hObject, eventdata, handles)
-% hObject    handle to KVal (see GCBO)
+function KValSlide_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to KValSlide (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
 
@@ -117,7 +128,7 @@ if isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColo
     set(hObject,'BackgroundColor',[.9 .9 .9]);
 end
 
-
+end 
 % --- Executes on selection change in videoChoice.
 function videoChoice_Callback(hObject, eventdata, handles)
 % hObject    handle to videoChoice (see GCBO)
@@ -126,98 +137,89 @@ function videoChoice_Callback(hObject, eventdata, handles)
 
 % Hints: contents = cellstr(get(hObject,'String')) returns videoChoice contents as cell array
 %        contents{get(hObject,'Value')} returns selected item from videoChoice
+videoChoice=get(handles.videoChoice, 'Value');
 
-videoChoice=get(handles.videoChoice, 'Value');
-switch videoChoice
-   % Load all shit
-videoChoice=get(handles.videoChoice, 'Value');
-% Load pictures
-raptorScrew = imread('Raptor_Screwdriver.JPG');
-teraScrew = imread('Tera_Screwdriver.JPG');
-humanScrew = imread('Human_Screwdriver.JPG');
-raptorPhone = imread('Raptor_Phone.JPG');
-teraPhone = imread('Tera_Phone.JPG');
-humanPhone = imread('Human_Phone.JPG');
-raptorBall = imread(' ');
-teraBall = imread(' ');
-humanBall = imread(' ');
-raptorSide = imread( ' ');
-teraSide = imread(' ');
-humanSide = imread(' ');
-raptorFront = imread(' ');
-teraFront = imread(' ');
-humanFront = imread(' ');
+raptorScrew = imread('raptorScrew.JPG');
+teraScrew = imread('TScrew.JPG');
+humanScrew = imread('handScrew.JPG');
+raptorPhone = imread('raptorPhone.JPG');
+teraPhone = imread('TPhone.JPG');
+humanPhone = imread('handPhone.JPG');
+raptorBall = imread('raptorBall.JPG');
+teraBall = imread('TBall.JPG');
+humanBall = imread('handBall.JPG');
+raptorSide = imread('raptorSide.jpg');
+teraSide = imread('TSide.JPG');
+humanSide = imread('handSide.JPG');
+raptorFront = imread('raptorFront.JPG');
+teraFront = imread('TFront.JPG');
+humanFront = imread('handFront.JPG');
 
 switch videoChoice
-    case 1 %screw
+     case 1 % front view
         axes(handles.raptor);
-        imrotate(raptorScrew, 0);
-        imshow(raptorScrew);
-        
-        axes(handles.Tera);
-        imrotate(teraScrew, 0);
-        imshow(teraScrew');
-        
-        axes(handles.Human);
-        imrotate(humanScrew,0);
-        imshow(humanScrew);
-    case 2 %phone choice
-        axes(handles.raptor);
-        imrotate(raptorPhone,0);
-        imshow(raptorPhone);
-        
-        axes(handles.Tera);
-        imrotate(teraPhone,0);
-        imshow(teraPhone);
-        
-        axes(handles.Human);
-        imrotate(humanPhone, 0);
-        imshow(humanPhone);
-    case 3 % Ball
-        axes(handles.raptor);
-        imrotate(raptorBall,0);
-        imshow(raptorBall);
-        
-        axes(handles.Tera);
-        imrotate(teraBall, 0);
-        imshow(teraBall);
-        
-        axes(handles.Human);
-        imrotate(humanBall, 0);
-        imshow(humanBall);
-    case 4 % front view
-        axes(handles.raptor);
-        imrotate(raptorFront, 0);
+        imrotate(raptorFront, 90);
         imshow(raptorFront);
         
         axes(handles.Tera);
-        imrotate(teraFront, 0);
+        imrotate(teraFront, 90);
         imshow(teraFront);
         
         axes(handles.Human);
         imrotate(humanFront, 0);
         imshow(humanFront);
-    case 5 %side view
+     case 2 %side view
         axes(handles.raptor);
-        imrotate(raptorSide, 0);
+        imrotate(raptorSide, -90);
         imshow(raptorSide);
         
         axes(handles.Tera);
-        imrotate(teraSide, 0);
+        imrotate(teraSide, -90);
         imshow(teraSide);
         
         axes(handles.Human);
-        imrotate(humanSide, 0);
+        imrotate(humanSide,-90);
         imshow(humanSide);
+    case 3 %screw
+        axes(handles.raptor);
+        imrotate(raptorScrew, 90);
+        imshow(raptorScrew);
+        
+        axes(handles.Tera);
+        imrotate(teraScrew, 90);
+        imshow(teraScrew');
+        
+        axes(handles.Human);
+        imrotate(humanScrew,90);
+        imshow(humanScrew);
+    case 4 %phone choice
+        axes(handles.raptor);
+        imrotate(raptorPhone,90);
+        imshow(raptorPhone);
+        
+        axes(handles.Tera);
+        imrotate(teraPhone,90);
+        imshow(teraPhone);
+        
+        axes(handles.Human);
+        imrotate(humanPhone, 90);
+        imshow(humanPhone);
+    case 5 % Ball
+        axes(handles.raptor);
+        imrotate(raptorBall,90);
+        imshow(raptorBall);
+        
+        axes(handles.Tera);
+        imrotate(teraBall, 90);
+        imshow(teraBall);
+        
+        axes(handles.Human);
+        imrotate(humanBall, 90);
+        imshow(humanBall);
+  
 end
 
-% elseif videoChoice = 'Side View Grasp'
-%     axes(handles.raptorImg);
-%     imshow('raptorPhone.JPG');
-% elseif videoChoice= 
-end
-
-
+end 
 
 % --- Executes during object creation, after setting all properties.
 function videoChoice_CreateFcn(hObject, eventdata, handles)
@@ -229,4 +231,32 @@ function videoChoice_CreateFcn(hObject, eventdata, handles)
 %       See ISPC and COMPUTER.
 if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
     set(hObject,'BackgroundColor','white');
+end
+end
+
+
+
+function KValEText_Callback(hObject, eventdata, handles)
+% hObject    handle to KValEText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of KValEText as text
+%        str2double(get(hObject,'String')) returns contents of KValEText as a double
+
+B=handles.KValEText.String;
+handles.KValSlide.Value=str2double(B);
+end
+
+% --- Executes during object creation, after setting all properties.
+function KValEText_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to KValEText (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
 end
