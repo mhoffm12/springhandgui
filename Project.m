@@ -114,7 +114,6 @@ handles.KValEText.String=num2str(k);
 [theta, Force] = HookFunc(k);
 plot(theta, Force, 'm');
 axes(handles.forceGraph);
-axis([0 90 0 500]);
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -268,7 +267,7 @@ function videoButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-vid= VideoReader('VideoforGUI.mp4');
+vid= VideoReader('LowQualityPterodactyl.mp4');
 mov= read(vid);
 implay(mov);
 
