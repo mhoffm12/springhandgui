@@ -112,8 +112,9 @@ k=handles.KValSlide.Value; %go find the slider and store the value in the variab
 handles.KValEText.String=num2str(k);
 
 [theta, Force] = HookFunc(k);
-plot(theta, Force, 'm');
 axes(handles.forceGraph);
+plot(theta, Force, 'm');
+
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -186,7 +187,7 @@ switch videoChoice
         
         axes(handles.Tera);
         imrotate(teraScrew, 90);
-        imshow(teraScrew');
+        imshow(teraScrew);
         
         axes(handles.Human);
         imrotate(humanScrew,90);
@@ -243,8 +244,13 @@ function KValEText_Callback(hObject, eventdata, handles)
 % Hints: get(hObject,'String') returns contents of KValEText as text
 %        str2double(get(hObject,'String')) returns contents of KValEText as a double
 
-B=handles.KValEText.String;
-handles.KValSlide.Value=str2double(B);
+k=handles.KValEText.String;
+handles.KValSlide.Value=str2double(k);
+
+[theta, Force] = HookFunc(k);
+axes(handles.forceGraph);
+plot(theta, Force, 'm');
+
 end
 
 % --- Executes during object creation, after setting all properties.
@@ -267,7 +273,7 @@ function videoButton_Callback(hObject, eventdata, handles)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
 
-vid= VideoReader('LowQualityPterodactyl.mp4');
+vid= VideoReader('PterodactylPresentation.mp4');
 mov= read(vid);
 implay(mov);
 
